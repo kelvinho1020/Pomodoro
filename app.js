@@ -9,12 +9,15 @@ const timeDisplay = document.querySelector(".time-display");
 const countDisplay = document.querySelector(".count-display");
 
 // Default
-let tempDuration = 600;
-let tempColor = "#03c6fc";
-let tempBackground = `url('./img/rain.jpg')`;
-let tempSong = "./sounds/rain.mp3";
-let countDefault = 0;
-let defaultDuration = 600;
+let state = {
+	duration: 3,
+	color: "#03c6fc",
+	song: "./sounds/rain.mp3",
+	background: `url('./img/rain.jpg')`,
+};
+let restTime = 300;
+let defaultCount = 0;
+let defaultDuration = 3;
 let notYetRest = true;
 
 const outlineLength = outline.getTotalLength();
@@ -37,18 +40,34 @@ function togglePlaying(song) {
 }
 
 function rest() {
+	// Style
 	outline.style.stroke = "#42f593";
-	defaultDuration = 5;
 	document.documentElement.style.setProperty("--background", `url('./img/rest.jpg')`);
+
+	// Count
+	defaultCount++;
+	countDisplay.textContent = `Take a rest`;
+
+	// Song
+	song.src = "./sounds/rest.mp3";
+	song.play();
+
+	defaultDuration = restTime;
+	notYetRest = false;
 }
 
 function reset() {
-	outline.style.stroke = tempColor;
-	tempDuration = 600;
-	defaultDuration = tempDuration;
+	// Style
+	outline.style.stroke = state.color;
+	document.documentElement.style.setProperty("--background", state.background);
+
+	// Time
+	state.duration = 1500;
+	defaultDuration = state.duration;
 	song.currentTime = 0;
-	document.documentElement.style.setProperty("--background", tempBackground);
-	notYetRest = true;
+
+	// Count
+	countDisplay.textContent = `count: ${defaultCount}`;
 }
 
 ///// Action /////
@@ -59,10 +78,9 @@ play.addEventListener("click", () => {
 
 // Reset
 resetButton.addEventListener("click", () => {
+	defaultCount = 0;
 	pause();
 	reset();
-	countDefault = 0;
-	countDisplay.textContent = `count: ${countDefault}`;
 });
 
 // Select Time
@@ -71,8 +89,8 @@ timeSelect.forEach(option => {
 		notYetRest = true;
 		reset();
 		pause();
-		countDisplay.textContent = `count: ${countDefault}`;
-		tempDuration = this.dataset.time;
+
+		state.duration = this.dataset.time;
 		defaultDuration = this.dataset.time;
 		timeDisplay.textContent = `${Math.floor(defaultDuration / 60)}:${Math.floor(defaultDuration % 60)}`;
 	});
@@ -82,14 +100,18 @@ timeSelect.forEach(option => {
 sounds.forEach(sound => {
 	sound.addEventListener("click", function () {
 		notYetRest = true;
-		document.documentElement.style.setProperty("--background", `url(${this.dataset.background})`);
-		countDisplay.textContent = `count: ${countDefault}`;
-		outline.style.stroke = this.dataset.color;
-		tempColor = this.dataset.color;
-		tempSong = this.dataset.sound;
-		tempBackground = `url(${this.dataset.background})`;
+
+		// New
 		song.src = this.dataset.sound;
-		defaultDuration = tempDuration;
+		outline.style.stroke = this.dataset.color;
+		state.color = this.dataset.color;
+		state.song = this.dataset.sound;
+		state.background = `url(${this.dataset.background})`;
+
+		// Old
+		countDisplay.textContent = `count: ${defaultCount}`;
+		document.documentElement.style.setProperty("--background", `url(${this.dataset.background})`);
+		defaultDuration = state.duration;
 		pause();
 	});
 });
@@ -113,20 +135,18 @@ song.ontimeupdate = () => {
 	if (currentTime >= defaultDuration) {
 		song.currentTime = 0;
 		if (notYetRest) {
-			countDefault++;
-			countDisplay.textContent = `Take a rest`;
-			song.src = "./sounds/rest.mp3";
-			song.play();
 			rest();
-			notYetRest = !notYetRest;
 		} else {
-			countDisplay.textContent = `count: ${countDefault}`;
-			outline.style.stroke = tempColor;
-			defaultDuration = tempDuration;
-			notYetRest = !notYetRest;
-			song.src = tempSong;
+			// State
+			countDisplay.textContent = `count: ${defaultCount}`;
+			outline.style.stroke = state.color;
+			defaultDuration = state.duration;
+			document.documentElement.style.setProperty("--background", state.background);
+			song.src = state.song;
+
+			// Others
 			song.play();
-			document.documentElement.style.setProperty("--background", tempBackground);
+			notYetRest = true;
 		}
 	}
 };
