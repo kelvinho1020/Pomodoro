@@ -12,6 +12,7 @@ const countDisplay = document.querySelector(".count-display");
 let tempDuration = 600;
 let tempColor = "#03c6fc";
 let tempBackground = `url('./img/rain.jpg')`;
+let tempSong = "./sounds/rain.mp3";
 let countDefault = 0;
 let defaultDuration = 600;
 let notYetRest = true;
@@ -42,11 +43,11 @@ function rest() {
 }
 
 function reset() {
-	tempColor = "#03c6fc";
 	outline.style.stroke = tempColor;
 	tempDuration = 600;
 	defaultDuration = tempDuration;
 	song.currentTime = 0;
+	document.documentElement.style.setProperty("--background", tempBackground);
 	notYetRest = true;
 }
 
@@ -59,6 +60,7 @@ play.addEventListener("click", () => {
 // Reset
 resetButton.addEventListener("click", () => {
 	pause();
+	reset();
 	countDefault = 0;
 	countDisplay.textContent = `count: ${countDefault}`;
 });
@@ -69,6 +71,7 @@ timeSelect.forEach(option => {
 		notYetRest = true;
 		reset();
 		pause();
+		countDisplay.textContent = `count: ${countDefault}`;
 		tempDuration = this.dataset.time;
 		defaultDuration = this.dataset.time;
 		timeDisplay.textContent = `${Math.floor(defaultDuration / 60)}:${Math.floor(defaultDuration % 60)}`;
@@ -80,9 +83,13 @@ sounds.forEach(sound => {
 	sound.addEventListener("click", function () {
 		notYetRest = true;
 		document.documentElement.style.setProperty("--background", `url(${this.dataset.background})`);
+		countDisplay.textContent = `count: ${countDefault}`;
 		outline.style.stroke = this.dataset.color;
 		tempColor = this.dataset.color;
+		tempSong = this.dataset.sound;
+		tempBackground = `url(${this.dataset.background})`;
 		song.src = this.dataset.sound;
+		defaultDuration = tempDuration;
 		pause();
 	});
 });
@@ -102,17 +109,23 @@ song.ontimeupdate = () => {
 
 	timeDisplay.textContent = `${minutes}:${seconds}`;
 
+	// Switching rest
 	if (currentTime >= defaultDuration) {
 		song.currentTime = 0;
 		if (notYetRest) {
 			countDefault++;
-			countDisplay.textContent = `count: ${countDefault}`;
+			countDisplay.textContent = `Take a rest`;
+			song.src = "./sounds/rest.mp3";
+			song.play();
 			rest();
 			notYetRest = !notYetRest;
 		} else {
+			countDisplay.textContent = `count: ${countDefault}`;
 			outline.style.stroke = tempColor;
 			defaultDuration = tempDuration;
 			notYetRest = !notYetRest;
+			song.src = tempSong;
+			song.play();
 			document.documentElement.style.setProperty("--background", tempBackground);
 		}
 	}
