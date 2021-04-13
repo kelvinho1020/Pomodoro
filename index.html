@@ -9,24 +9,18 @@
 		<title>Pomodoro</title>
 	</head>
 	<body>
+    <h1>Pomodoro</h1>
 		<div class="pomodoro_container">
-			<!-- Video -->
-			<div class="video_container">
-				<video loop type="video/mp4">
-					<source src="./video/rain.mp4" />
-				</video>
-			</div>
-
 			<!-- Time Select -->
 			<div class="time_select">
-				<button data-time="10">2 Minutes</button>
+				<button data-time="3">2 Minutes</button>
 				<button data-time="300">5 Minutes</button>
 				<button data-time="600">10 Minutes</button>
 			</div>
 
 			<!-- Player -->
 			<div class="player_container">
-				<audio class="song">
+				<audio class="song" loop>
 					<source src="./sounds/rain.mp3" />
 				</audio>
 				<img src="./svg/play.svg" alt="play" class="play" />
@@ -51,19 +45,23 @@
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
 				>
-					<circle cx="226.5" cy="226.5" r="216.5" stroke="#018EBA" stroke-width="20" />
+					<circle cx="226.5" cy="226.5" r="216.5" stroke="#03c6fc" stroke-width="20" />
 				</svg>
-				<img src="./svg/replay.svg" class="replay" />
-				<h3 class="time-display">0:00</h3>
+				<img src="./svg/replay.svg" class="reset" />
+				<h3 class="time-display">10:00</h3>
+				<h3 class="count-display">count: 0</h3>
 			</div>
 
 			<!-- BGM -->
 			<div class="sound_picker">
-				<button data-sound="./sounds/rain.mp3" data-video="./video/rain.mp4">
+				<button data-sound="./sounds/rain.mp3" data-background="./img/rain.jpg" data-color='#03c6fc'>
 					<img src="./svg/rain.svg" alt="rain" />
 				</button>
-				<button data-sound="./sounds/beach.mp3" data-video="./video/beach.mp4">
+				<button data-sound="./sounds/beach.mp3" data-background="./img/beach.jpg" data-color='#ffc933'>
 					<img src="./svg/beach.svg" alt="beach" />
+				</button>
+				<button data-sound="./sounds/fire.mp3" data-background="./img/fire.jpg" data-color='#ff2121'>
+					<img src="./svg/fire.svg" alt="fire" />
 				</button>
 			</div>
 		</div>

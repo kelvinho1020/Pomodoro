@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap");
+:root {
+	--background: url(./img/rain.jpg);
+}
 
 * {
 	margin: 0;
@@ -13,6 +16,21 @@ html {
 body {
 	font-size: 1.6rem;
 	font-family: RocknRoll One, sans-serif;
+	/* background-image: url(./img/rain.jpg); */
+	background-image: var(--background);
+	background-repeat: no-repeat;
+	background-size: cover;
+	transition: 0.5s;
+	text-align: center;
+}
+
+h1 {
+	position: fixed;
+	font-size: 5rem;
+	color: white;
+	top: 10%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .pomodoro_container {
@@ -45,14 +63,15 @@ body {
 }
 
 .play,
-.replay {
+.reset {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	cursor: pointer;
 }
 
-.replay {
+.reset {
 	left: 50%;
 	top: 69%;
 }
@@ -60,6 +79,13 @@ body {
 .time-display {
 	position: absolute;
 	bottom: 10%;
+	color: white;
+	font-size: 5rem;
+}
+
+.count-display {
+	position: absolute;
+	top: 10%;
 	color: white;
 	font-size: 5rem;
 }
@@ -91,16 +117,24 @@ body {
 	padding: 2rem;
 }
 
+.sound_picker button:hover {
+	transform: scale(1.1);
+}
+
 .sound_picker img {
 	height: 100%;
 }
 
 .sound_picker button:nth-child(1) {
-	background: #4972a1;
+	background: #03c6fc;
 }
 
 .sound_picker button:nth-child(2) {
-	background: #a14f49;
+	background: #ffc933;
+}
+
+.sound_picker button:nth-child(3) {
+	background: #ff2121;
 }
 
 video {
