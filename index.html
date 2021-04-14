@@ -6,10 +6,13 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
 		<link rel="stylesheet" href="./style.css" />
+		<link rel="icon" href="./img/favicon.ico">
 		<title>Pomodoro</title>
 	</head>
 	<body>
-    <h1>Pomodoro</h1>
+		<div class="title_container">
+			<h1>Pomodoro</h1>
+		</div>
 		<div class="pomodoro_container">
 			<!-- Time Select -->
 			<div class="time_select">
@@ -28,8 +31,6 @@
 				<!-- Outer -->
 				<svg
 					class="track-outline"
-					width="453"
-					height="453"
 					viewBox="0 0 453 453"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
@@ -39,8 +40,6 @@
 				<!-- Inner -->
 				<svg
 					class="moving-outline"
-					width="453"
-					height="453"
 					viewBox="0 0 453 453"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
@@ -54,13 +53,13 @@
 
 			<!-- BGM -->
 			<div class="sound_picker">
-				<button data-sound="./sounds/rain.mp3" data-background="./img/rain.jpg" data-color='#03c6fc'>
+				<button data-sound="./sounds/rain.mp3" data-background="./img/rain.jpg" data-color="#03c6fc">
 					<img src="./svg/rain.svg" alt="rain" />
 				</button>
-				<button data-sound="./sounds/beach.mp3" data-background="./img/beach.jpg" data-color='#ffc933'>
+				<button data-sound="./sounds/beach.mp3" data-background="./img/beach.jpg" data-color="#ffc933">
 					<img src="./svg/beach.svg" alt="beach" />
 				</button>
-				<button data-sound="./sounds/fire.mp3" data-background="./img/fire.jpg" data-color='#ff2121'>
+				<button data-sound="./sounds/fire.mp3" data-background="./img/fire.jpg" data-color="#ff2121">
 					<img src="./svg/fire.svg" alt="fire" />
 				</button>
 			</div>
