@@ -89,6 +89,58 @@ body {
 	font-size: 5rem;
 }
 
+.slide_container {
+	position: absolute;
+	bottom: 2%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 20rem;
+}
+
+.volume {
+	-webkit-appearance: none;
+	width: 100%;
+	outline: none;
+	border-radius: 20px;
+	height: 1rem;
+}
+
+.volume::before{
+	content: '0';
+	color: white;
+	position: absolute;
+	left: -10%;
+	font-size: 2rem;
+	top: 16%;
+}
+
+.volume::after{
+	content: '100';
+	color: white;
+	position: absolute;
+	right: -20%;
+	font-size: 2rem;
+	top: 13%;
+}
+
+.volume::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 2rem;
+	height: 2rem;
+	background: rgb(63, 63, 63);
+	border-radius: 20px;
+}
+
+.volume::-moz-range-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 2rem;
+	height: 2rem;
+	background: rgb(63, 63, 63);
+	border-radius: 20px;
+}
+
 /* Time and sound */
 .time_select button,
 .sound_picker button {
@@ -147,7 +199,6 @@ video {
 	z-index: -10;
 }
 
-
 button:focus {
 	outline: 0;
 }
@@ -194,6 +245,14 @@ button:focus {
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%) scale(0.7);
+	}
+
+	.slide_container {
+		position: absolute;
+		bottom: -22%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 20rem;
 	}
 
 	.count-display {

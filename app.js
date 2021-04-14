@@ -2,6 +2,7 @@ const song = document.querySelector(".song");
 const play = document.querySelector(".play");
 const resetButton = document.querySelector(".reset");
 const outline = document.querySelector(".moving-outline circle");
+const volume = document.querySelector(".volume");
 
 const sounds = document.querySelectorAll(".sound_picker button");
 const timeSelect = document.querySelectorAll(".time_select button");
@@ -57,6 +58,10 @@ function reset() {
 // Play sound
 play.addEventListener("click", () => {
 	togglePlaying(song);
+});
+
+volume.addEventListener("change", function () {
+	song.volume = this.value / 100;
 });
 
 document.addEventListener("keyup", e => {
