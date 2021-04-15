@@ -187,7 +187,6 @@ song.ontimeupdate = () => {
 
 			// Others
 			song.play();
-
 			notYetRest = true;
 		}
 	}
@@ -195,7 +194,7 @@ song.ontimeupdate = () => {
 
 window.addEventListener("load", function () {
 	if (!localStorage.getItem("count")) {
-		localStorage.setItem("count", +0);
+		localStorage.setItem("count", 0);
 	} else {
 		countDisplay.textContent = `count: ${localStorage.getItem("count")}`;
 		defaultCount = localStorage.getItem("count");
