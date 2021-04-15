@@ -154,8 +154,6 @@ song.ontimeupdate = () => {
 
 	timeDisplay.textContent = `${minutes}:${seconds}`;
 
-	// Title Color
-
 	// Switching rest
 	if (currentTime >= defaultDuration) {
 		song.currentTime = 0;
