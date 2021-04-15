@@ -3,6 +3,8 @@ const play = document.querySelector(".play");
 const resetButton = document.querySelector(".reset");
 const outline = document.querySelector(".moving-outline circle");
 const volume = document.querySelector(".volume");
+const title = document.querySelector("h1");
+const subTitle = document.querySelectorAll("h3");
 
 const sounds = document.querySelectorAll(".sound_picker button");
 const timeSelect = document.querySelectorAll(".time_select button");
@@ -54,6 +56,16 @@ function reset() {
 	countDisplay.textContent = `count: ${defaultCount}`;
 }
 
+function countCheck() {
+	if (defaultCount >= 9) {
+		title.classList.add("complete");
+		subTitle.forEach(title => title.classList.add("complete"));
+	} else {
+		title.classList.remove("complete");
+		subTitle.forEach(title => title.classList.remove("complete"));
+	}
+}
+
 ///// Action /////
 // Play sound
 play.addEventListener("click", () => {
@@ -64,7 +76,7 @@ volume.addEventListener("change", function () {
 	song.volume = this.value / 100;
 });
 
-document.addEventListener("keyup", e => {
+window.addEventListener("keyup", e => {
 	if (e.keyCode === 32) {
 		togglePlaying(song);
 	}
@@ -74,12 +86,22 @@ document.addEventListener("keyup", e => {
 		pause();
 		reset();
 	}
+	if (e.keyCode === 39) {
+		volume.value = +volume.value + 10;
+		song.volume = volume.value / 100;
+	}
+	if (e.keyCode === 37) {
+		volume.value -= 10;
+		song.volume = volume.value / 100;
+	}
 });
 
 // Reset
 resetButton.addEventListener("click", () => {
 	defaultCount = 0;
 	notYetRest = true;
+	localStorage.setItem("count", +0);
+	countCheck()
 	pause();
 	reset();
 });
@@ -132,17 +154,23 @@ song.ontimeupdate = () => {
 
 	timeDisplay.textContent = `${minutes}:${seconds}`;
 
+	// Title Color
+
 	// Switching rest
 	if (currentTime >= defaultDuration) {
 		song.currentTime = 0;
 
 		if (notYetRest) {
+			// CountCheck
+			countCheck();
+
 			// Style
 			outline.style.stroke = "#42f593";
 			document.documentElement.style.setProperty("--background", `url('./img/rest.jpg')`);
 
 			// Count
 			defaultCount++;
+			localStorage.setItem("count", defaultCount);
 			countDisplay.textContent = `Take a rest`;
 
 			// Song
@@ -166,3 +194,13 @@ song.ontimeupdate = () => {
 		}
 	}
 };
+
+window.addEventListener("load", function () {
+	if (!localStorage.getItem("count")) {
+		localStorage.setItem("count", +0);
+	} else {
+		countDisplay.textContent = `count: ${localStorage.getItem("count")}`;
+		defaultCount = localStorage.getItem("count");
+		countCheck();
+	}
+});

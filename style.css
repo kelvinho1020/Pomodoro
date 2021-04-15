@@ -105,8 +105,8 @@ body {
 	height: 1rem;
 }
 
-.volume::before{
-	content: '0';
+.volume::before {
+	content: "0";
 	color: white;
 	position: absolute;
 	left: -10%;
@@ -114,8 +114,8 @@ body {
 	top: 16%;
 }
 
-.volume::after{
-	content: '100';
+.volume::after {
+	content: "100";
 	color: white;
 	position: absolute;
 	right: -20%;
@@ -203,6 +203,35 @@ button:focus {
 	outline: 0;
 }
 
+.complete {
+	animation: complete 4s infinite;
+}
+
+/* Animation */
+@keyframes complete {
+	0% {
+		color: purple;
+	}
+
+	25% {
+		color: yellow;
+	}
+
+	50% {
+		color: green;
+		transform: scale(1.3);
+	}
+
+	75% {
+		color: blue;
+	}
+
+	100% {
+		color: red;
+	}
+}
+
+/* Media query */
 @media only screen and (max-width: 860px) {
 	html {
 		font-size: 50%;
