@@ -101,7 +101,7 @@ resetButton.addEventListener("click", () => {
 	defaultCount = 0;
 	notYetRest = true;
 	localStorage.setItem("count", +0);
-	countCheck()
+	countCheck();
 	pause();
 	reset();
 });
@@ -125,16 +125,19 @@ sounds.forEach(sound => {
 	sound.addEventListener("click", function () {
 		notYetRest = true;
 
-		// Update state
-		song.src = this.dataset.sound;
+		// Style
 		outline.style.stroke = this.dataset.color;
 		state.color = this.dataset.color;
-		state.song = this.dataset.sound;
 		state.background = `url(${this.dataset.background})`;
-
+		document.documentElement.style.setProperty("--background", state.background);
+		
+		// Count
 		countDisplay.textContent = `count: ${defaultCount}`;
-		document.documentElement.style.setProperty("--background", `url(${this.dataset.background})`);
 		defaultDuration = state.duration;
+		
+		// Song
+		state.song = this.dataset.sound;
+		song.src = this.dataset.sound;
 		pause();
 	});
 });
