@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap");
 
 :root {
-	--background: url(./img/rain.jpg);
+	--background: url(./img/rain.png);
 	--stroke: rgb(255, 255, 255);
 }
 
@@ -16,6 +16,7 @@ html {
 }
 
 body {
+	background-color: 	#ABABAB;
 	font-size: 1.6rem;
 	font-family: RocknRoll One, sans-serif;
 	background-image: var(--background);

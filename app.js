@@ -16,7 +16,7 @@ let state = {
 	duration: 1500,
 	color: "#03c6fc",
 	song: "./sounds/rain.mp3",
-	background: `url('./img/rain.jpg')`,
+	background: `url('./img/rain.png')`,
 };
 let restTime = 299;
 let defaultCount = 0;
@@ -123,6 +123,7 @@ timeSelect.forEach(option => {
 // Select Song
 sounds.forEach(sound => {
 	sound.addEventListener("click", function () {
+		console.log(this.dataset.background);
 		notYetRest = true;
 
 		// Style
@@ -130,11 +131,11 @@ sounds.forEach(sound => {
 		state.color = this.dataset.color;
 		state.background = `url(${this.dataset.background})`;
 		document.documentElement.style.setProperty("--background", state.background);
-		
+
 		// Count
 		countDisplay.textContent = `count: ${defaultCount}`;
 		defaultDuration = state.duration;
-		
+
 		// Song
 		state.song = this.dataset.sound;
 		song.src = this.dataset.sound;
