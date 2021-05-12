@@ -16,7 +16,7 @@ let state = {
 	duration: 1500,
 	color: "#03c6fc",
 	song: "./sounds/rain.mp3",
-	background: `url('./img/rain.png')`,
+	background: `url('./img/rain.jpg')`,
 };
 let restTime = 299;
 let defaultCount = 0;
@@ -58,10 +58,8 @@ function reset() {
 
 function countCheck() {
 	if (defaultCount >= 9) {
-		title.classList.add("complete");
 		subTitle.forEach(title => title.classList.add("complete"));
 	} else {
-		title.classList.remove("complete");
 		subTitle.forEach(title => title.classList.remove("complete"));
 	}
 }
