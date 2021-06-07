@@ -5,4 +5,3 @@ The aim of this app is to help you focus on any task you are working on, such as
 ## Demo
 https://minipomodoro.netlify.app
 
-![image](https://github.com/kelvinho1020/Pomodoro/blob/master/pomodoro.gif)
